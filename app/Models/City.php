@@ -15,7 +15,7 @@ class City extends Model
         return $this->hasMany(Tour::class, 'tour_id');
     }
     
-    public function provinces(): BelongsTo
+    public function provinces()
     {
         return $this->belongsTo(Province::class);
     }
