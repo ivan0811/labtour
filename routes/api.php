@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CommentController;
+use App\Http\Controllers\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,13 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
         Route::post('/', [CommentController::class, 'store']);
         Route::patch('/{id}', [CommentController::class, 'update']);
         Route::delete('/{id}', [CommentController::class, 'delete']);
+    });    
+
+    Route::prefix('search')->group(function () {
+        Route::get('/', [SearchController::class, 'show']);
+        Route::post('/', [SearchController::class, 'store']);
+        Route::patch('/{id}', [SearchController::class, 'update']);
+        Route::delete('/{id}', [SearchController::class, 'delete']);
     });    
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

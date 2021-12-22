@@ -9,7 +9,7 @@ class CommentController extends Controller
 {
     public function show(){
         return response()->json([
-            Comment::with('tours')->with('users')->get();
+            Comment::with('tours')->with('users')->get()
         ], 200);
     }
 
