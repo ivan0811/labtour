@@ -4,30 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Search;
+use App\Models\Island;
 
-class SearchController extends Controller
+class IslandsController extends Controller
 {
     public function show(Request $request){
-        $validator = Validator::make($request->all(), [
-            'search' => 'required'
-        ]);
-
-        if($validator->fails()){
-            return response()->json([
-                'status' => false,
-                'message' => $validator->errors()
-            ], 401);
-        }
-
         return response()->json([
-            Search::with('user')->where('search', 'LIKE', '%'.$request->search.'%')->get()
+            Island::all()
         ], 200);
     }
 
     public function store(Request $request){
         $validator = Validator::make($request->all(), [
-            'search' => 'required'
+            'name' => 'required'
         ]);
 
         if($validator->fails()){
@@ -37,17 +26,16 @@ class SearchController extends Controller
             ], 401);
         }
 
-        $search = Search::create([
-            'user_id' => $request->user()->id,
-            'search' => $request->search
+        $island = Island::create([
+            'name' => $request->name
         ]);
 
-        return response()->json($search, 200);
+        return response()->json($island, 200);
     }
 
     public function update(Request $request, $id){
         $validator = Validator::make($request->all(), [
-            'search' => 'required'
+            'name' => 'required'
         ]);
 
         if($validator->fails()){
@@ -57,16 +45,16 @@ class SearchController extends Controller
             ], 200);
         }
 
-        $search = Search::findOrFail($id);
+        $island = Island::findOrFail($id);
 
-        $search->search = $request->search;
-        $search->save();
+        $island->name = $request->name;
+        $island->save();
 
-        return response()->json($search, 200);
+        return response()->json($island, 200);
     }
 
     public function delete($id){
-        Search::findOrFail($id)->delete();
+        Island::findOrFail($id)->delete();
         return response()->json([
             'message' => 'delete success'
         ], 200);
