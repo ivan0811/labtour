@@ -14,4 +14,9 @@ class Island extends Model
     {
         return $this->hasMany(Province::class, 'island_id');
     }
+    
+    public function city()
+    {
+        return $this->hasMany(City::class, 'island_id');
+    }
 }

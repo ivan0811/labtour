@@ -8,6 +8,10 @@ use App\Models\Island;
 
 class IslandsController extends Controller
 {
+    public function showIslandTour(){
+        return response()->json(Island::with('province')->with('city')->with('tour')->get(), 200);
+    }
+
     public function show(Request $request){
         return response()->json([
             Island::all()

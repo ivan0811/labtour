@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Search;
+use App\Models\{Search, Tour};
 
 class SearchController extends Controller
 {
+    public function searchTour(Request $request){        
+        return response()->json(Tour::where('name', 'LIKE', '%'.$request->q.'%')->get(), 200);
+    }
+
     public function show(Request $request){
         $validator = Validator::make($request->all(), [
             'search' => 'required'
@@ -25,7 +29,7 @@ class SearchController extends Controller
         ], 200);
     }
 
-    public function store(Request $request){
+    public function store(Request $request){        
         $validator = Validator::make($request->all(), [
             'search' => 'required'
         ]);

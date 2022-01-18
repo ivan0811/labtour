@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\API\CommentController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\IslandsController;
 use App\Http\Controllers\ProvinceController;
@@ -37,11 +37,11 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     });    
 
     Route::prefix('search')->group(function () {
-        Route::get('/', [SearchController::class, 'show']);
-        Route::post('/', [SearchController::class, 'store']);
-        Route::patch('/{id}', [SearchController::class, 'update']);
-        Route::delete('/{id}', [SearchController::class, 'delete']);
-    });
+        Route::get('/', [SearchController::class, 'searchTour']);
+        // Route::post('/', [SearchController::class, 'store']);
+        // Route::patch('/{id}', [SearchController::class, 'update']);
+        // Route::delete('/{id}', [SearchController::class, 'delete']);
+    });    
 
     Route::prefix('islands')->group(function () {
         Route::get('/', [IslandsController::class, 'show']);
@@ -59,6 +59,8 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     
     Route::prefix('cities')->group(function () {
         Route::get('/', [CitiesController::class, 'show']);
+        Route::get('/tour', [CitiesController::class, 'showCitiesTour']);
+        Route::get('/tour-by-id/{id}', [CitiesController::class, 'showCitiesTourById']);
         Route::post('/', [CitiesController::class, 'store']);
         Route::patch('/{id}', [CitiesController::class, 'update']);
         Route::delete('/{id}', [CitiesController::class, 'delete']);

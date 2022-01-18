@@ -8,10 +8,19 @@ use App\Models\City;
 
 class CitiesController extends Controller
 {
+    
     public function show(Request $request){
         return response()->json([
             City::all()
         ], 200);
+    }
+
+    public function showCitiesTour(){
+        return response()->json(City::with('tour')->get(), 200);
+    }
+
+    public function showCitiesTourById($id){
+        return response()->json(City::findOrFail($id)->with('tour')->get(), 200);
     }
 
     public function store(Request $request){

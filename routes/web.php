@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ScrapingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route::get('/scraping', [ScrapingController::class, 'storeWilayah']);
+// Route::get('/tour', [ScrapingController::class, 'tour']);
+// Route::get('/nav-tour', [ScrapingController::class, 'navigationTour']);
+// Route::get('/store-tour', [ScrapingController::class, 'storeTour']);

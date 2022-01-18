@@ -8,15 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class City extends Model
 {
     use HasFactory;
-    protected $fillable = ['province_id', 'name'];
+    protected $fillable = ['province_id', 'island_id', 'name', 'url'];
     
-    public function tours()
+    public function tour()
     {
-        return $this->hasMany(Tour::class, 'tour_id');
+        return $this->hasMany(Tour::class, 'city_id');
     }
     
-    public function provinces()
+    public function province()
     {
         return $this->belongsTo(Province::class);
+    }
+        
+    public function island()
+    {
+        return $this->belongsTo(Island::class);
     }
 }

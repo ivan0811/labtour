@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Tour;
 
 class TourController extends Controller
-{
+{        
     public function show(Request $request){
         return response()->json([
             Tour::all()
         ], 200);
-    }
+    }        
 
     public function store(Request $request){
         $validator = Validator::make($request->all(), [
